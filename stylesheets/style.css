@@ -109,12 +109,52 @@ footer {
     text-align: center;
 }
 
-.plus a i{
-    font-size: 2rem;
-}
-
 .copyright {
     color: #5e5e5e;
     font-weight: 300;
     font-size: .65rem;
+}
+
+.hide{
+    text-align: center;
+    border: 2px solid grey;
+    border-radius: 5%;
+    padding: 0 0 1% 0;
+    width: 300px;
+    margin: 0 auto 2% auto;
+    display: none;
+}
+
+.coin-search {
+    background: no-repeat scroll 10px 10px;
+    border-radius: 5%;
+    margin-bottom: 10px;
+    width: 80%;
+    height: 30px;
+}
+
+.coin-select {
+    font-size: 2rem;
+}
+
+.hide2 {
+    font-size: 2rem;
+    display: none;
+    color: black; 
+}
+
+.hide1 {
+    font-size: 2rem;
+    display: block;
+    color: black;
+}
+
+.ion-plus-circled:hover,
+.ion-close-round:hover {
+    cursor: pointer;
+    color: grey;
+}
+
+.add-close {
+    font-size: 1.3rem; 
 }
