@@ -15,3 +15,28 @@ var myTime = document.getElementById('clock').innerHTML = + mo + "/" + da + "/" 
 }
 
 setInterval(displayClock, 1000);
+
+$(function () {
+
+    $.get("https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC,ETH&tsyms=USD", function (data) {
+        $.each(data['DISPLAY'], function (index, value) {
+
+            var spanPrice = $('<span/>')
+                .attr('id', index + "price")
+                .html(value['USD']['PRICE']);
+
+            var spanMktcap = $('<span/>')
+                .attr('id', index + "mktcap")
+                .html(value['USD']['MKTCAP']);
+
+            var $newDiv = $("<div/>")   // creates a div element
+                .attr("id", index)  // adds the id
+                .addClass("element")   // add a class
+                .append(spanPrice)
+                .append(spanMktcap)
+
+            $("body").append($newDiv);
+        });
+    });
+
+});
