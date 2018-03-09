@@ -1,6 +1,6 @@
 var cryptoCompareAPI = "https://www.cryptocompare.com";
 var coinMarketURL = "https://api.coinmarketcap.com";
-var updateInterval = 2 * 1000;
+var updateInterval = 6 * 1000;
 
 var app = new Vue({
   el: "#app",
@@ -50,12 +50,11 @@ var app = new Vue({
   }
 });
 
+console.log(document.querySelectorAll('holdings')[0].value)
+
 
 setInterval(() =>{
 
   app.getCoinData();
 
 }, updateInterval);
-
-// total value = holdings * price 
-// store 
