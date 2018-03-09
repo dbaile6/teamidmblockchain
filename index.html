@@ -9,76 +9,61 @@
     <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://bootswatch.com/simplex/bootstrap.min.css">
 </head>
-<body>
+<body class = "container">
     <header>
         <h1>IDM</h1> <!-- <img src="img/idm-logo.png" alt="idm" class="logo"> -->
         <i class="ion-navicon-round"></i>
     </header>
     <main class="main-container">
-        <div class="total-summary">
-            <div class="port-value">
-            <h1>Total Portfolio Value</h1>
-            <p>$</p>
-            </div>
-            <div class="port-change">
-            <h1>Daily Change</h1>
-            <p>%</p>
-            </div>
-        </div>
-        <div class="headings">
-                <h1>Currency</h1>
-                <h1>Holdings</h1>
-                <h1>Price</h1>
-                <h1>Chg. %</h1>
-        </div>
-        <div class="token-container">
-            <div class="colum-container">
-                <div class="token">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/16x16/1.png" alt="BTC">
-                    <a href="#" class="ticker">BTC</a>
-                </div>
-                <div class"token">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/16x16/1027.png" alt="ETH">
-                    <a href="#" class="ticker">ETH</a>
-                </div>
-                <div class"token">
-                    <img src="https://s2.coinmarketcap.com/static/img/coins/16x16/2.png" alt="LTC">
-                    <a href="#" class="ticker">LTC</a>
-                </div>
-            </div>
-            <div class="colum-container">
-                <p>100</p>
-                <p>75</p>
-                <p>800</p>
-            </div>
-            <div class="colum-container">
-                <p>1000</p>
-                <p>750</p>
-                <p>185</p>
-            </div>
-            <div class="colum-container">
-                <p>10%</p>
-                <p>75%</p>
-                <p>18%</p>
-            </div>
-        </div>
-        <div class="hide">
-            <h1 class="coin-select">Select Coin</h1>
-            <input class="coin-search" type="search" placeholder="search for coin">
-            <!-- <img class="search-img" src="img/search_pic.png"> -->
+        <h1>Static CryptoCurrency Tracker</h1>
+        
+        <p>This data is updated every minute. </p>
+        
+        <div id="app">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <td>Rank</td>
+                        <td>Holdings</td>
+                        <td>Name</td>
+                        <td>Symbol</td>
+                        <td>Price (USD)</td>
+                        <td>Last hour</td>
+                        <td>Market Cap (USD)</td>
+                </thead>
+                <tbody>
+                    <tr v-for="coin in coins">
+                        <td>{{ coin.rank }}</td>
+                        <td><input type="text" name="Holdings" value="holdings"></td>
+                        <td :src="getCoinImage(coin.symbol)">{{ coin.name}}</td>
+                        <td>{{ coin.symbol }}</td>
+                        <td>{{ coin.price_usd | currency }}</td>
+                        <td :style="getColor(coin.percent_change_1h)">
+                            <span v-if="coin.percent_change_1h > 0">+</span>{{ coin.percent_change_1h }}%
+                        </td>
+                        <td>{{ coin.market_cap_usd | currency }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <div class="plus">
-            <a class="hide1"><i class="ion-plus-circled"></i><br><span class="add-close">add coin</span></a>
-            <a class="hide2"><i class="ion-close-round"></i><br><span class="add-close">close tab</span></a>
+            <a><i class="ion-plus-circled"></i><br>add coin</a>
         </div>
         <footer>
             <p class="copyright">© 2018 <span style="color:#000000; font-weight: 500">IDM</span> All rights reserved</p>
         </footer>
     </main>
     <div>
-
     </div>
-    <script src="scripts/IDM.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="scripts/vue2-filters.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="scripts/app.js"></script>
 </body>
 </html>
