@@ -10,11 +10,10 @@ var app = new Vue({
   },
   methods: {
 
-    getCoinData: function () {
+    getCoinData: function() {
       var self = this;
 
-
-      axios.get(cryptoCompareAPI + "/api/data/coinlist")
+         axios.get(cryptoCompareAPI + "/api/data/coinlist")
         .then((resp) => {
           this.coinData = resp.data.Data;
           this.getCoins();
@@ -25,7 +24,8 @@ var app = new Vue({
         });
     },
 
-    getCoins: function () {
+
+    getCoins: function() {
       var self = this;
       axios.get(coinMarketURL + "/v1/ticker/?limit=10")
         .then((resp) => {
@@ -36,7 +36,9 @@ var app = new Vue({
         });
     },
 
-    getCoinImage: function (symbol) {
+
+
+    getCoinImage: function(symbol) {
       symbol = (symbol === "MIOTA" ? "IOT" : symbol);
       symbol = (symbol === "VERI" ? "VRM" : symbol);
     },
@@ -45,18 +47,21 @@ var app = new Vue({
       return num > 0 ? "color:green;" : "color:red;";
     },
   },
-  created: function () {
+
+
+  created: function() {
     this.getCoinData();
   }
 });
 
 
-setInterval(() => {
+
+
+setInterval(() =>{
 
   app.getCoinData();
 
 }, updateInterval);
-
 
 //click event for opening and creating a new DIV with inner elements
 document.querySelector(".ion-plus-circled").addEventListener("click", function(){
@@ -95,3 +100,6 @@ document.querySelector(".ion-plus-circled").addEventListener("click", function()
 //END
 
 
+=======
+// total value = holdings * price 
+// store 
