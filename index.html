@@ -81,22 +81,28 @@
         
       <div class="colum-container">
       <p>Holdings</p>
-      <p><input type="text" id="pctvalue" placeholder="0">
+      <div id="calculate"><p><input v-model.number= "total.holding">
         <p>Price (USD)</p>
-        <p><div id="coinprice">{{coin.price_usd}} </p></div>
+        <p><div id="coinprice" class="coinprice">{{coin.price_usd}} </p></div>
       </div> 
       <p>{{currency}}
+        {{coin.price_usd * total.holding}}
         
       </p>
         <p>Daily Change:</p>
         <p :style="getColor(coin.percent_change_1h)">
           <span v-if="coin.percent_change_1h > 0">+</span>{{ coin.percent_change_1h }}%
         </p>
-        <p>Total Portfolio Value
-       <div id="totalpctvalue"> {{ coin.price_usd  }}
+        <p id="totalresult" v-model = "totalresult" type="number" class="form-control" name ="totalresult" id = "totalresult" placeholder="0">
+        result
+        <div id="totalresult"></div>
+          </p></div>
+        </p>
+        
       </div>
     </div>
     </div>  
+    
           <div class="hide">
             <h1 class="coin-select">Select Coin</h1>
             <input class="coin-search" type="search" placeholder="search for coin">
@@ -119,9 +125,12 @@
               <span style="color:#000000; font-weight: 500">IDM</span> All rights reserved</p>
           </footer>
           </div>
+          <div id="demo">
+            <input v-model="from_amount" id="from_amount" type="text" class="form-control" name="from_amount">
+            <input id="from_amount" type="text" class="form-control" name="to_amount" :value="calculatedFromAmount">
+          </div>
           <script src="scripts/idm.js"></script>
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
           <script src="https://unpkg.com/vue"></script>
           <script src="scripts/vue2-filters.min.js"></script>
           <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
