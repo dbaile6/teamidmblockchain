@@ -7,13 +7,14 @@ var app = new Vue({
   data: {
     coins: [],
     coinData: {}
+    
   },
   methods: {
 
-    getCoinData: function() {
+    getCoinData: function () {
       var self = this;
 
-         axios.get(cryptoCompareAPI + "/api/data/coinlist")
+      axios.get(cryptoCompareAPI + "/api/data/coinlist")
         .then((resp) => {
           this.coinData = resp.data.Data;
           this.getCoins();
@@ -25,7 +26,7 @@ var app = new Vue({
     },
 
 
-    getCoins: function() {
+    getCoins: function () {
       var self = this;
       axios.get(coinMarketURL + "/v1/ticker/?limit=10")
         .then((resp) => {
@@ -38,7 +39,7 @@ var app = new Vue({
 
 
 
-    getCoinImage: function(symbol) {
+    getCoinImage: function (symbol) {
       symbol = (symbol === "MIOTA" ? "IOT" : symbol);
       symbol = (symbol === "VERI" ? "VRM" : symbol);
     },
@@ -49,22 +50,34 @@ var app = new Vue({
   },
 
 
-  created: function() {
+  created: function () {
     this.getCoinData();
   }
 });
 
 
 
+var demo = new Vue({
+    el: '#demo',
+    data: function(){
+    	return {
+				from_amount: '',
+        to_amount: ''
+      };
+    },
+        computed: {
+            calculatedFromAmount: function() {
+                return (this.from_amount * 750) / 0.00024
+            }
+        }
+})
 
-setInterval(() =>{
-
-  app.getCoinData();
-
-}, updateInterval);
+  setInterval(() => {
+    app.getCoinData();
+  }, updateInterval);
 
 //click event for opening and creating a new DIV with inner elements
-document.querySelector(".ion-plus-circled").addEventListener("click", function(){
+document.querySelector(".ion-plus-circled").addEventListener("click", function () {
   var mainBody = document.querySelector('body');
   //create div element with class
   var searchDiv = document.createElement("div");
@@ -81,7 +94,7 @@ document.querySelector(".ion-plus-circled").addEventListener("click", function()
   var searchImage = document.createElement('img');
   searchImage.setAttribute('src', 'img/search_pic.png');
   searchImage.setAttribute('class', 'searchImage');
-  
+
   var nCurrency = document.querySelector('.newCurrency');
   //creating icon element
   var exitIcon = document.createElement("i");
@@ -91,15 +104,28 @@ document.querySelector(".ion-plus-circled").addEventListener("click", function()
   searchDiv.appendChild(searchInput);
   searchDiv.appendChild(exitIcon);
   searchDiv.appendChild(searchImage);
-  mainBody.appendChild(searchDiv); 
+  mainBody.appendChild(searchDiv);
   //click event for closing the new div
-  document.querySelector(".ion-close-round").addEventListener("click", function(){
+  document.querySelector(".ion-close-round").addEventListener("click", function () {
     mainBody.removeChild(searchDiv);
   });
 });
 //END
 
+// total value = holdings * price
+// store
 
-=======
-// total value = holdings * price 
-// store 
+// function getIt() {
+// var dar = document.getElementById('calculate').value;
+// var coinPrice = document.getElementById('coinprice').value;
+// console.log(coinPrice);
+// console.log(dar);
+// var multiply = dar * coinPrice;
+// document.getElementById('totalresult').appendChild(multiply)
+// setInterval = 60 * 1000,
+// }
+//function getHoldings() {
+//  var holdings = document.getElementById('pctvalue').value;
+//  var currentPrice = document.getElementById('coinprice').value;
+
+// console.log(getHoldings)
