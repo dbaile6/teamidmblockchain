@@ -83,7 +83,11 @@
       <p>Holdings</p>
       <p><input type="text" id="pctvalue" placeholder="0">
         <p>Price (USD)</p>
-        <p>{{ coin.price_usd}}</p> <p>{{currency}}</p>
+        <p><div id="coinprice">{{coin.price_usd}} </p></div>
+      </div> 
+      <p>{{currency}}
+        
+      </p>
         <p>Daily Change:</p>
         <p :style="getColor(coin.percent_change_1h)">
           <span v-if="coin.percent_change_1h > 0">+</span>{{ coin.percent_change_1h }}%
