@@ -2,4 +2,4 @@ This CryptoCurrency Tracker was built with Vue.JS. It allows users to get a list
 
 It was created by Dylan Bailey, Itzik Shaoulian, and Moses Lee.
 
-View the project at https://dbaile6.github.io/statictracker/
+View the project at https://dbaile6.github.io/teamidmblockchain/
