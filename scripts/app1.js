@@ -1,16 +1,30 @@
 
-var portfolioObj = [];
-console.log(portfolioObj);
+var holdingsNode = document.querySelector('#holdings');
+var holdingInputs = holdingsNode.querySelectorAll('input');
+var all = [];
 
-var savePortfolio = function(){
-    localStorage.setItem('portfolioObj', JSON.stringify(portfolioObj))
+var getList = JSON.parse(localStorage.getItem('all'));
+// console.log(getList);
+
+for(var i = 0; i < holdingInputs.length; i++){
+    if(Object.values(Object.values(getList)[0])[i] >= 0){
+        holdingInputs[i].value = Object.values(Object.values(getList)[0])[i];
+    }
 }
 
-var retrievePortfolio = function(){
-    JSON.parse(localStorage.getItem('portfolioObj'));
-}
+document.querySelector('#holdings').addEventListener('input',function(){
+    var portfolioArray = {};
+    for(var i = 0; i < holdingInputs.length; i++){
+        portfolioArray['input'+String(i)] = holdingInputs[i].value;
+    }
+    // console.log(portfolioArray)
+    all =[];
+    all.push(portfolioArray)
+    // console.log(all)
+    localStorage.setItem('all', JSON.stringify(all))
+    
+});
 
-retrievePortfolio();
 
 var priceAjax = function(){
     $.ajax({
@@ -24,8 +38,8 @@ var priceAjax = function(){
         }  
     })
 }
-setInterval(priceAjax, 1500);
-    
+setInterval(priceAjax, 10000);
+
 var totalValue = function(){
     var total = 0;
     var sum = 0;
@@ -34,66 +48,42 @@ var totalValue = function(){
         sum += total;
     }
     document.querySelector('#totalPortfolioValue').textContent = "$"+(sum.toFixed(2));
-    var porValue = {nowValue: Number(document.querySelector('#totalPortfolioValue').textContent.slice(1,-1))}
-    portfolioObj.push(porValue);
-    savePortfolio();
 }
-setInterval(totalValue, 1500);
+setInterval(totalValue, 1000);
+
+
+var updateChange =function(cryptoChanges){
+    var apiKeys = Object.keys(cryptoChanges).length;
+    for(var i = 0; i < apiKeys; i++){
+        var divChange = document.querySelector('#change');
+        var valueWentUp = Object.values(cryptoChanges)[i].percent_change_1h > 0;
+        var valueWentDown = Object.values(cryptoChanges)[i].percent_change_1h < 0;
+        var nodeList = divChange.querySelectorAll('p');
+        var color = "grey";
+        if(valueWentUp){
+            color = "green";
+        }else if(valueWentDown){
+            color = "red";
+        }
+        nodeList[i].style.color = color;
+        nodeList[i].innerHTML = Object.values(cryptoChanges)[i].percent_change_1h + "%";
+    }
+}
+
 
 var dailyChangeAjax = function(){
     $.ajax({
-        url: 'https://api.coinmarketcap.com/v1/ticker/?limit=1000',
+        url: 'https://api.coinmarketcap.com/v1/ticker/?limit=17',
         type: 'GET',
         success: function(cryptoChanges) {
-            for(var i = 0; i < Object.keys(cryptoChanges).length; i++){
-                var divChange = document.querySelector('#change');
-                // if(document.querySelector('#currency').querySelector('a').innerText == Object.keys(cryptoChanges)[i].symbol){
-                    if(Object.values(cryptoChanges)[i].percent_change_1h > 0){
-                        divChange.querySelectorAll('p')[i].innerHTML = Object.values(cryptoChanges)[i].percent_change_1h + "%";
-                        divChange.querySelectorAll('p')[i].style.color = "green";
-                    }else{
-                        divChange.querySelectorAll('p')[i].innerHTML = Object.values(cryptoChanges)[i].percent_change_1h + "%";
-                        divChange.querySelectorAll('p')[i].style.color = "red";
-                    }
-                // }
-            }
+            updateChange(cryptoChanges);
         }
     })
 }
-setInterval(dailyChangeAjax, 1500);
-
-
-
-
-
-// var x = function(){
-//     // Put the object into storage
-//     localStorage.setItem('portfolioObj', JSON.stringify(portfolioObj));
-
-//     // Retrieve the object from storage
-//     var retrievedObject = localStorage.getItem('portfolioObj');
-
-//     console.log('retrievedObject: ', JSON.parse(retrievedObject));
-//     return totalMoney;
-// }
-
-// setInterval(x,3000);
-
-
-
-// document.querySelector('#totalPortfolioValue').textContent
-
-// document.querySelector('#totalDailyChange').textContent =
-
-var now = Number(document.querySelector('#totalPortfolioValue').textContent.slice(1,-1));
-if(now !== Number(document.querySelector('#totalPortfolioValue').textContent.slice(1,-1))){
-    document.querySelector('#totalDailyChange').textContent = Number(document.querySelector('#totalPortfolioValue').textContent.slice(1,-1)) / now;
-}
-
-
+setInterval(dailyChangeAjax, 1800000);
   
-  //click event for opening and creating a new DIV with inner elements
-  document.querySelector(".ion-plus-circled").addEventListener("click", function(){
+//click event for opening and creating a new DIV with inner elements
+document.querySelector(".ion-plus-circled").addEventListener("click", function(){
     var mainBody = document.querySelector('body');
     //create div element with class
     var searchDiv = document.createElement("div");
@@ -110,7 +100,7 @@ if(now !== Number(document.querySelector('#totalPortfolioValue').textContent.sli
     var searchImage = document.createElement('img');
     searchImage.setAttribute('src', 'img/search_pic.png');
     searchImage.setAttribute('class', 'searchImage');
-    
+
     var nCurrency = document.querySelector('.newCurrency');
     //creating icon element
     var exitIcon = document.createElement("i");
@@ -123,12 +113,15 @@ if(now !== Number(document.querySelector('#totalPortfolioValue').textContent.sli
     mainBody.appendChild(searchDiv); 
     //click event for closing the new div
     document.querySelector(".ion-close-round").addEventListener("click", function(){
-      mainBody.removeChild(searchDiv);
+        mainBody.removeChild(searchDiv);
     });
-  });
+});
 
+dailyChangeAjax();
+priceAjax();
+totalValue();
 
-     
+    
   
   
   
