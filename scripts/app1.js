@@ -4,11 +4,13 @@ var holdingInputs = holdingsNode.querySelectorAll('input');
 var all = [];
 
 var getList = JSON.parse(localStorage.getItem('all'));
-// console.log(getList);
+console.log(getList);
 
 for(var i = 0; i < holdingInputs.length; i++){
-    if(Object.values(Object.values(getList)[0])[i] >= 0){
-        holdingInputs[i].value = Object.values(Object.values(getList)[0])[i];
+    if(getList !== null){
+        if(Object.values(Object.values(getList)[0])[i] >= 0){
+            holdingInputs[i].value = Object.values(Object.values(getList)[0])[i];
+        }
     }
 }
 
@@ -17,10 +19,10 @@ document.querySelector('#holdings').addEventListener('input',function(){
     for(var i = 0; i < holdingInputs.length; i++){
         portfolioArray['input'+String(i)] = holdingInputs[i].value;
     }
-    // console.log(portfolioArray)
+    console.log(portfolioArray)
     all =[];
     all.push(portfolioArray)
-    // console.log(all)
+    console.log(all)
     localStorage.setItem('all', JSON.stringify(all))
     
 });
