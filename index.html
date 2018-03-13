@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cryptokeeper</title>
+    <link rel="shortcut icon" type="image" href="img/cryptokeeper-logo.png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald:600" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/newFile.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="cryptokeeper">
+        <p>cryptokeeper</p>
+        </div>
+        <i class="ion-navicon-round"></i>
+    </header>
+    <main class="main-container">
+        <div class="total-summary">
+            <div class="port-value">
+            <h1>Total Portfolio Value</h1>
+            <p id="totalPortfolioValue">$</p>
+            </div>
+            <div class="port-change">
+            <h1>Daily Change</h1>
+            <p id="totalDailyChange">%</p>
+            </div>
+        </div>
+        <div class="headings">
+                <h1>Currency</h1>
+                <h1>Holdings</h1>
+                <h1>Price</h1>
+                <h1>1h Chg.</h1>
+        </div>
+        <div class="token-container">
+            <div id="currency" class="column-container">
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Bitcoin@3x.png" alt="BTC">BTC</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Ethereum@3x.png" alt="ETH">ETH</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Ripple@3x.png" alt="XRP">XRP</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Bitcoin Cash@3x.png" alt="BCH">BCH</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Litecoin@3x.png" alt="LTC">LTC</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Cardano@3x.png" alt="ADA">ADA</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/NEO@3x.png" alt="NEO">NEO</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Stellar Lumens@3x.png" alt="XLM">XLM</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/EOS@3x.png" alt="EOS">EOS</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Monero@3x.png" alt="XMR">XMR</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/NEM@3x.png" alt="XEM">XEM</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Dash@3x.png" alt="DASH">DASH</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/IOTA@3x.png" alt="MIOTA">MIOTA</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/TRON@3x.png" alt="TRX">TRX</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Tether@3x.png" alt="USDT">USDT</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/Ethereum Classic@3x.png" alt="ETC">ETC</a>
+                </div>
+                <div class="token">
+                    <a href="#" class="ticker"><img src="img/icons/VeChain@3x.png" alt="VEN">VEN</a>
+                </div>
+            </div>
+            <div id="holdings" class="column-container">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+                <input type="text" name="amount" placeholder="-" class="holdingAmount">
+            </div>
+
+            <div id="price" class="column-container">
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+
+            <div id="change" class="column-container">
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+
+        </div>
+        
+        <div class="hide">
+            <h6 class="coin-select">Select Coin</h6>
+            <input class="coin-search" type="search" placeholder="search for coin">
+        </div>
+        <div class="plus">
+            <a><i class="ion-plus-circled"></i><br>add coin</a>
+        </div>
+        <footer>
+            <p class="copyright">© 2018 IDM Corp. All rights reserved</p>
+        </footer>
+    </main>
+    <div>
+
+    </div>
+    <script src="scripts/app1.js" charset="utf-8"></script>
+</body>
+</html>
