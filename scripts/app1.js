@@ -1,6 +1,7 @@
 
 var holdingsNode = document.querySelector('#holdings');
 var holdingInputs = holdingsNode.querySelectorAll('input');
+// var totalPortfolio = Number(document.querySelector('#totalPortfolioValue').innerText.slice(1));
 var all = [];
 
 var getList = JSON.parse(localStorage.getItem('all'));
@@ -14,17 +15,21 @@ for(var i = 0; i < holdingInputs.length; i++){
     }
 }
 
-document.querySelector('#holdings').addEventListener('input',function(){
+holdingsNode.addEventListener('input',function(){
     var portfolioArray = {};
+    var money = {};
     for(var i = 0; i < holdingInputs.length; i++){
         portfolioArray['input'+String(i)] = holdingInputs[i].value;
     }
-    console.log(portfolioArray)
     all =[];
     all.push(portfolioArray)
+    money['moneyAmount'] = Number(document.querySelector('#totalPortfolioValue').innerText.slice(1));
+    console.log(portfolioArray)
+    
+    all.push(money)
     console.log(all)
     localStorage.setItem('all', JSON.stringify(all))
-    
+    dailyChangeValue();
 });
 
 
@@ -45,7 +50,7 @@ setInterval(priceAjax, 10000);
 var totalValue = function(){
     var total = 0;
     var sum = 0;
-    for(var i = 0; i < document.querySelector('#holdings').querySelectorAll('input').length; i++){    
+    for(var i = 0; i < holdingsNode.querySelectorAll('input').length; i++){    
         total = Number(document.querySelectorAll('.holdingAmount')[i].value) * Number(document.querySelector('#price').querySelectorAll('p')[i].textContent);
         sum += total;
     }
@@ -83,6 +88,36 @@ var dailyChangeAjax = function(){
     })
 }
 setInterval(dailyChangeAjax, 1800000);
+
+var dailyChangeValue = function(){
+    if(getList !== null){
+        if(Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)) !== Object.values(getList)[1].moneyAmount){
+            if(Object.values(getList)[1].moneyAmount === 0){
+                document.querySelector('#totalDailyChange').textContent = "0.0%"
+                document.querySelector('#totalDailyChange').style.color = "gray"
+            }
+            else if(Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)) > Object.values(getList)[1].moneyAmount){
+                document.querySelector('#totalDailyChange').textContent = "+" + String((Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)) / Object.values(getList)[1].moneyAmount).toFixed(3))+"%"
+                document.querySelector('#totalDailyChange').style.color = "green"
+            }
+            else if(Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)) < Object.values(getList)[1].moneyAmount && Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)) !== 0){
+                document.querySelector('#totalDailyChange').textContent = "-" + String((Object.values(getList)[1].moneyAmount / (Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)))).toFixed(3))+"%"
+                document.querySelector('#totalDailyChange').style.color = "red"
+            }
+            else if(Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)) === Object.values(getList)[1].moneyAmount){
+                document.querySelector('#totalDailyChange').textContent = "0.0%"
+                document.querySelector('#totalDailyChange').style.color = "gray"
+            }
+            else if(Number(document.querySelector('#totalPortfolioValue').innerText.slice(1)) === 0){
+                document.querySelector('#totalDailyChange').textContent = "0.0%"
+                document.querySelector('#totalDailyChange').style.color = "gray"
+            }
+            
+        }
+    }
+}
+setInterval(dailyChangeValue, 3000);
+
   
 //click event for opening and creating a new DIV with inner elements
 document.querySelector(".ion-plus-circled").addEventListener("click", function(){
@@ -122,6 +157,10 @@ document.querySelector(".ion-plus-circled").addEventListener("click", function()
 dailyChangeAjax();
 priceAjax();
 totalValue();
+dailyChangeValue();
+
+
+
 
     
   
